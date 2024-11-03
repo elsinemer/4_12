@@ -1,0 +1,38 @@
+class Autor:
+    def __init__(self, nombre="", nacionalidad=""):
+        self.nombre = nombre
+        self.nacionalidad = nacionalidad  # Desafío 1
+        self.libros = []  # Lista de libros escritos por el autor
+
+    def agregar_libro(self, titulo_libro):
+        """Agrega un libro a la lista de libros del autor."""
+        if titulo_libro not in self.libros:
+            self.libros.append(titulo_libro)
+            print(f'El libro "{titulo_libro}" ha sido agregado.')
+        else:
+            print(f'El libro "{titulo_libro}" ya está en la lista.')
+
+    def eliminar_libro(self, titulo_libro):
+        """Elimina un libro de la lista de libros del autor si existe."""
+        if titulo_libro in self.libros:
+            self.libros.remove(titulo_libro)
+            print(f'El libro "{titulo_libro}" ha sido eliminado.')
+        else:
+            print(f'El libro "{titulo_libro}" no se encuentra en la lista.')
+
+    def mostrar_libros(self):
+        """Muestra la lista de libros escritos por el autor."""
+        if self.libros:
+            print(f'Libros de {self.nombre}:')
+            for libro in self.libros:
+                print(f'- {libro}')
+        else:
+            print(f'{self.nombre} no tiene libros en la lista.')
+
+# Ejemplo de uso
+autor = Autor("Gabriel García Márquez", "Colombiana")
+autor.agregar_libro("Cien años de soledad")
+autor.agregar_libro("El amor en los tiempos del cólera")
+autor.mostrar_libros()
+autor.eliminar_libro("Cien años de soledad")
+autor.mostrar_libros()
