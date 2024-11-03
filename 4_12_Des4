@@ -1,0 +1,73 @@
+class Libro:
+    def __init__(self, titulo, genero, isbn):
+        self.titulo = titulo
+        self.genero = genero
+        self.isbn = isbn
+
+    def __str__(self):
+        return f'"{self.titulo}" (Género: {self.genero}, ISBN: {self.isbn})'
+
+class Autor:
+    def __init__(self, nombre="", nacionalidad="", fecha_nacimiento=None, premios=None):
+        self.nombre = nombre
+        self.nacionalidad = nacionalidad  # Desafío 1
+        self.fecha_nacimiento = fecha_nacimiento  # Fecha de nacimiento del autor
+        self.premios = premios if premios else []  # Lista de premios recibidos
+        self.libros = []  # Lista de libros escritos por el autor
+
+    def agregar_libro(self, libro):
+        """Agrega un libro a la lista de libros del autor."""
+        if isinstance(libro, Libro) and libro not in self.libros:
+            self.libros.append(libro)
+            print(f'El libro "{libro.titulo}" ha sido agregado.')
+        elif libro in self.libros:
+            print(f'El libro "{libro.titulo}" ya está en la lista.')
+        else:
+            print('El objeto proporcionado no es una instancia de la clase Libro.')
+
+    def eliminar_libro(self, libro):
+        """Elimina un libro de la lista de libros del autor si existe."""
+        if libro in self.libros:
+            self.libros.remove(libro)
+            print(f'El libro "{libro.titulo}" ha sido eliminado.')
+        else:
+            print(f'El libro "{libro.titulo}" no se encuentra en la lista.')
+
+    def mostrar_libros(self):
+        """Muestra la lista de libros escritos por el autor."""
+        if self.libros:
+            print(f'Libros de {self.nombre}:')
+            for libro in self.libros:
+                print(f'- {libro}')
+        else:
+            print(f'{self.nombre} no tiene libros en la lista.')
+
+    def agregar_premio(self, premio):
+        """Agrega un premio a la lista de premios del autor."""
+        if premio not in self.premios:
+            self.premios.append(premio)
+            print(f'El premio "{premio}" ha sido agregado.')
+        else:
+            print(f'El premio "{premio}" ya está en la lista.')
+
+    def mostrar_premios(self):
+        """Muestra la lista de premios recibidos por el autor."""
+        if self.premios:
+            print(f'Premios de {self.nombre}:')
+            for premio in self.premios:
+                print(f'- {premio}')
+        else:
+            print(f'{self.nombre} no tiene premios en la lista.')
+
+# Ejemplo de uso
+libro1 = Libro("Cien años de soledad", "Novela", "1234567890")
+libro2 = Libro("El amor en los tiempos del cólera", "Novela", "0987654321")
+
+autor = Autor("Gabriel García Márquez", "Colombiana", "6 de marzo de 1927")
+autor.agregar_libro(libro1)
+autor.agregar_libro(libro2)
+autor.agregar_premio("Premio Nobel de Literatura")
+autor.mostrar_libros()
+autor.mostrar_premios()
+autor.eliminar_libro(libro1)
+autor.mostrar_libros()
